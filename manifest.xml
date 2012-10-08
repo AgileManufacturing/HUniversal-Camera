@@ -1,0 +1,14 @@
+<package>
+  <description brief="HUniversal_camera">
+
+     HUniversal_camera
+
+  </description>
+  <author>Arjan Groenewgeen</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/HUniversal_camera</url>
+
+</package>
+
+
