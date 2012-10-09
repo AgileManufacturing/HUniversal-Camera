@@ -27,13 +27,13 @@
  *
  **/ 
 
- #include <cameraNode.h>
+#include <cameraNode.h>
 
- int main(int argc, char* argv[]){
-    ros::init(argc, argv, "camera");
+int main(int argc, char* argv[]){
+	ros::init(argc, argv, "camera");
 
-    cameraNode cn(argc, argv);
+	CameraNode cn(argc, argv);
     cn.run();
 
     return 0;
- }
+}

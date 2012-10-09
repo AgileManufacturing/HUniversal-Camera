@@ -4,5 +4,5 @@
 # TODO: Find a nicer way to take care of this. 
 
 set(LIB_CAMERA_INCLUDE "${LCV_SOURCE_DIR}/libraries/camera/include")
-set(LIB_UNICAPCVBRIDGE_INCLUDE "${LCV_SOURCE_DIR}/libraries/unicap_cv_bridge/include")
+set(LIB_UNICAPCVBRIDGE_INCLUDE "${LCV_SOURCE_DIR}/libraries/unicap/include")
 

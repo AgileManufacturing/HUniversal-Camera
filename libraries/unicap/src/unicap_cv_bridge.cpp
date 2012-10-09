@@ -28,7 +28,7 @@
 //******************************************************************************
 
 
-#include "unicap_cv_bridge.h"
+#include <Unicap/unicap_cv_bridge.h>
 
 #include <cstdio>
 #include <stdint.h>
