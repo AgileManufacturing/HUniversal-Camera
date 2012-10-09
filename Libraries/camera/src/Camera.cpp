@@ -27,31 +27,32 @@
  *
  **/ 
 
- #include "Camera.h"
+#include "Camera.h"
+#include <unicap_cv_bridge.h> 
 
- Camera::Camera(int argc, char *argv[]) {
- 		//setup the camera
-		int device_number = atoi(argv[1]);
-		int format_number = atoi(argv[2]);
-		cam = new unicap_cv_camera(device_number,format_number);
-		cam->set_auto_white_balance(true);
-		cam->set_exposure(0.015);
-		camFrame = Mat(cam->get_img_height(), cam->get_img_width(), cam->get_img_format());				
- 
-		//setup the camera lens distortion corrector
-		rectifier = new RectifyImage();
-		if(!rectifier->initRectify(argv[3], cv::Size( cam->get_img_width(),cam->get_img_height()))){
-			cout << "XML not found" << endl;
-			exit(2);
-		}
- }
+Camera::Camera(int argc, char *argv[]) {
+	//setup the camera
+	int device_number = atoi(argv[1]);
+	int format_number = atoi(argv[2]);
+	cam = new unicap_cv_camera(device_number,format_number);
+	cam->set_auto_white_balance(true);
+	cam->set_exposure(0.015);
+	camFrame = Mat(cam->get_img_height(), cam->get_img_width(), cam->get_img_format());				
 
- void Camera::addPoints(const vector<Point2f>& imageCorners, const vector<Point3f>& objectCorners) {
+	//setup the camera lens distortion corrector
+	rectifier = new RectifyImage();
+	if(!rectifier->initRectify(argv[3], cv::Size(cam->get_img_width(), cam->get_img_height()))) {
+		cout << "XML not found" << endl;
+		exit(2);
+	}
+}
+
+void Camera::addPoints(const vector<Point2f>& imageCorners, const vector<Point3f>& objectCorners) {
     imagePoints.push_back(imageCorners);
     objectPoints.push_back(objectCorners);
- }
+}
 
- double Camera::postProcessing(Size &imageSize) {
+double Camera::postProcessing(Size &imageSize) {
     vector<Mat> rvecs, tvecs;
 
     return calibrateCamera(	objectPoints,
@@ -61,14 +62,14 @@
 		                    distCoeffs,     // output distortion matrix
 		                    rvecs, tvecs,   // Rs, Ts
 		                    0);             // set options
- }
+}
 
- int RectifyImage::createXML(const char* imageDir, const Size &boardSize, const char* XMLName) {
+int RectifyImage::createXML(const char* imageDir, const Size &boardSize, const char* XMLName) {
     vector<Point2f> imageCorners;
     vector<Point3f> objectCorners;
 
-    for (int i=0; i<boardSize.height; i++) {
-        for (int j=0; j<boardSize.width; j++) {
+    for(int i = 0; i<boardSize.height; i++) {
+        for(int j = 0; j<boardSize.width; j++) {
             objectCorners.push_back(Point3f(i, j, 0.0f));
         }
     }
@@ -109,9 +110,9 @@
     fs << "distCoeffs" << distCoeffs;
     fs.release();
     return successes;
- }
+}
 
- bool Camera::initRectify(const char* XMLName, const Size &imageSize) {
+bool Camera::initRectify(const char* XMLName, const Size &imageSize) {
     if(!is_regular_file(XMLName)) {
         return false;
     }
@@ -121,8 +122,8 @@
     fs["distCoeffs"] >> distCoeffs;
     initUndistortRectifyMap(cameraMatrix, distCoeffs, Mat(), Mat(), imageSize, CV_32FC1, map1, map2);
     return true;
- }
+}
 
- void Camera::rectify(const Mat &input, Mat &output) {
+void Camera::rectify(const Mat &input, Mat &output) {
     remap(input, output, map1, map2, INTER_LINEAR);
- }
+}

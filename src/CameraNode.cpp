@@ -49,5 +49,3 @@ void CameraNode::run() {
 
 	}
 }
-
-
