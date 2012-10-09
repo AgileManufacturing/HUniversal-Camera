@@ -24,17 +24,19 @@
  * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT 
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- * 
- * @note 2012-10-04 PdW: Constructor still needs some tidying up.
- * @note 2012-10-05 AvZ: Constructor tidied up!
+ *
  **/
+
+ 
 
  namespace Camera 
  {
  	class Camera
  	{
  		Camera(); //constructor
- 		
+
+ 		double postProcessing();
+ 		void sendData();
  	};
  }
 

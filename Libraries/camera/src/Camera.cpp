@@ -1,6 +1,6 @@
 /**
- * @file Camera.h
- * @brief Camera node
+ * @file Camera.cpp
+ * @brief code for the camera class
  * @date Created: 2012-10-08
  * 
  * @author Arjan Groenewegen
@@ -27,6 +27,8 @@
  *
  **/ 
 
- #include "ros/ros.h"
+ #include "Camera.h"
 
-ros::Publisher pub = nh.advertise<
+ Camera::Camera() {
+ 	
+ }
