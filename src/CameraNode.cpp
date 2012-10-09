@@ -31,10 +31,14 @@
 
 #define NODE_NAME "CameraNode" 
 
-static Camera::Camera * cam;
+//static Camera::Camera * cam;
 
 CameraNode::CameraNode() {
 
+}
+
+bool recalibrate(std_srvs::Empty &req, std_srvs::Empty &res) {
+	return true;
 }
 
 void CameraNode::run() {
@@ -46,6 +50,7 @@ void CameraNode::run() {
 
 	while(nh.ok()) {
 		//read image 
-
+		cam->get_frame(&camFrame);
+		camera->rectify(camFrame, rectifiedCamFrame);
 	}
 }
