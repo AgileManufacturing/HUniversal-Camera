@@ -1,0 +1,9 @@
+# camera # 
+if(OpenCV_FOUND AND Boost_FOUND)
+	camera_add_library(camera)
+	include_directories(${OpenCV_INCLUDE_DIRS})
+	include_directories(${Boost_INCLUDE_DIRS})
+	target_link_libraries(camera ${OpenCV_LIBS} ${Boost_SYSTEM_LIBRARY} ${Boost_FILESYSTEM_LIBRARY})
+else(OpenCV_FOUND AND Boost_FOUND)
+	camera_cannot_build(CameraCalibration "libraries/camera")
+endif(OpenCV_FOUND AND Boost_FOUND)
