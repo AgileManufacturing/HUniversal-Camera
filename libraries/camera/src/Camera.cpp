@@ -27,7 +27,7 @@
  *
  **/ 
 
- #include "Camera.h"
+ #include "Camera/camera.h"
 
  Camera::Camera(int argc, char *argv[]) {
  		//setup the camera
