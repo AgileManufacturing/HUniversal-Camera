@@ -1,6 +1,6 @@
 /**
- * @file main.cpp
- * @brief main class, starts the camera node
+ * @file CameraNode.h
+ * @brief Header for the camera node class
  * @date Created: 2012-10-09
  * 
  * @author Patrick de Wit
@@ -25,15 +25,10 @@
  * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT 
  * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- **/ 
+ **/
 
- #include <cameraNode.h>
-
- int main(int argc, char* argv[]){
-    ros::init(argc, argv, "camera");
-
-    cameraNode cn(argc, argv);
-    cn.run();
-
-    return 0;
+ namespace Camera{
+ 	class CameraNode{
+ 		CameraNode(); //constructor
+ 	};
  }
