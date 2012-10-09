@@ -27,6 +27,27 @@
  *
  **/ 
 
- #include "ros/ros.h"
+#include "ros/ros.h"
 
-ros::Publisher pub = nh.advertise<
+#define NODE_NAME "CameraNode" 
+
+static Camera::Camera * cam;
+
+CameraNode::CameraNode() {
+
+}
+
+void CameraNode::run() {
+	if(!calibrate()) ros::shutdown();
+
+	it(nh);
+	pub = it.advertise("camera/image", 1);
+
+
+	while(nh.ok()) {
+		//read image 
+
+	}
+}
+
+

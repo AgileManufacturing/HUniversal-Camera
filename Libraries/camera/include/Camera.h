@@ -27,16 +27,24 @@
  *
  **/
 
- 
+#ifndef CAMERA_H
+#define CAMERA
+
+#include <unicap_cv_bridge.hpp> 
 
  namespace Camera 
  {
  	class Camera
  	{
- 		Camera(); //constructor
+ 		public: 
+	 		Camera(); //constructor
 
- 		double postProcessing();
- 		void sendData();
+	 		double postProcessing();
+	 		void sendData();
+	 	private:
+	 		unicap_cv_bridge::unicap_cv_camera * cam;
  	};
  }
+
+ #endif
 

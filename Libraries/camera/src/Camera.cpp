@@ -29,6 +29,19 @@
 
  #include "Camera.h"
 
- Camera::Camera() {
- 	
+ Camera::Camera(int argc, char *argv[]) {
+ 		//setup the camera
+		int device_number = atoi(argv[1]);
+		int format_number = atoi(argv[2]);
+		cam = new unicap_cv_camera(device_number,format_number);
+		cam->set_auto_white_balance(true);
+		cam->set_exposure(0.015);
+		camFrame = Mat(cam->get_img_height(), cam->get_img_width(), cam->get_img_format());				
+ 
+		//setup the camera lens distortion corrector
+		rectifier = new RectifyImage();
+		if(!rectifier->initRectify(argv[3], cv::Size( cam->get_img_width(),cam->get_img_height()))){
+			cout << "XML not found" << endl;
+			exit(2);
+		}
  }
