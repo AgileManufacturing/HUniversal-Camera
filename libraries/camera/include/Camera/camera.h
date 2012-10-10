@@ -30,14 +30,19 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
+#include <Camera/RectifyImage.h>
 #include <Camera/unicap_cv_bridge.h>
+
 class Camera {
 	public:
-		Camera(); //constructor
+		Camera(int argc, char* argv[]); //constructor
 
- 		void sendData();
+ 		void sendData(void);
  	private:
  		unicap_cv_bridge::unicap_cv_camera * cam;
+ 		RectifyImage * rectifier;
+
+ 		cv::Mat camFrame;
 };
 
  #endif

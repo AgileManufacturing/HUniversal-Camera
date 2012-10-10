@@ -71,8 +71,7 @@ namespace unicap_cv_bridge
 	/**
 	 * @brief unicap exception
 	 **/
-	class unicap_cv_exception : public std::runtime_error
-	{
+	class unicap_cv_exception : public std::runtime_error {
 		public:
 			unicap_cv_exception(const std::string& msg) : std::runtime_error(msg) {}
 			virtual ~unicap_cv_exception(void) throw() {}
@@ -81,11 +80,9 @@ namespace unicap_cv_bridge
 	/**
 	 * @brief handle to unicap camera
 	 **/
-	class unicap_cv_camera
-	{
+	class unicap_cv_camera {
 		private:
-			typedef enum  _frame_cap_state
-			{
+			typedef enum  _frame_cap_state {
 				FCSTATE_DONT_COPY,
 				FCSTATE_COPY,
 				FCSTATE_SUCCESS,
