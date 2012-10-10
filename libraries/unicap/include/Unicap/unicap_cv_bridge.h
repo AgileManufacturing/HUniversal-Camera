@@ -4,7 +4,7 @@
 //
 //******************************************************************************
 // Project:        unicap cv bridge
-// File:           unicap_cv_bridge.hpp
+// File:           unicap_cv_bridge.h
 // Description:    symbolizes a unicap camera. frames can be grabbed and put into matrices
 // Author:         Lukas Vermond & Kasper van Nieuwland
 // Notes:          
