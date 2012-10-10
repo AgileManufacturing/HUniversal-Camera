@@ -33,7 +33,7 @@ Camera::Camera(int argc, char* argv[]) {
 	//setup the camera
 	int device_number = atoi(argv[1]);
 	int format_number = atoi(argv[2]);
-	cam = new unicap_cv_camera(device_number, format_number);
+	cam = new unicap_cv_bridge::unicap_cv_camera(device_number, format_number);
 	cam->set_auto_white_balance(true);
 	cam->set_exposure(0.015);
 	camFrame = cv::Mat(cam->get_img_height(), cam->get_img_width(), cam->get_img_format());				
