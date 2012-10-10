@@ -1,1 +1,1 @@
-add_subdirectories("camera;unicap;") 
+add_subdirectories("camera;") 

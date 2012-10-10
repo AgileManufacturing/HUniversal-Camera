@@ -25,7 +25,7 @@ add_dependencies(cameraNode camera)
 include_directories("${LIB_CAMERA_INCLUDE}")
 
 # Link target to our libraries
-target_link_libraries(camera)
+target_link_libraries(UNICAM_BRIGE)
 
 # MUST be called after lcv_rospack_init to clean up after ROSBUILD!
 camera_rospack_end()

@@ -30,7 +30,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <unicap_cv_bridge.h>
+#include <Camera/unicap_cv_bridge.h>
 
 class Camera {
 	public: 
