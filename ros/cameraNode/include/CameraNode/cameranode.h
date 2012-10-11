@@ -37,7 +37,7 @@
 
 #include <image_transport/image_transport.h>
 #include <opencv/cvwimage.h>
-#include "cv_bridge/CvBridge.h"
+#include <cv_bridge/cv_bridge.h>
 #include <sensor_msgs/image_encodings.h>
 #include <std_msgs/Header.h>
 #include <opencv2/core/core.hpp>
@@ -66,9 +66,6 @@ private:
 
 	int numberOfStableFrames;
 	bool invokeCalibration; 
-
-protected:
-	sensor_msgs::CvBridge bridge;
 };
 
 #endif

@@ -30,8 +30,7 @@
 #include "CameraNode/cameranode.h"
 
 CameraNode::CameraNode(int argc, char * argv[]) 
-:
-it(nodeHandler)
+	:it(nodeHandler)
 {
 	if (argc != 4){
 		exit(1);
@@ -68,10 +67,20 @@ void CameraNode::run() {
 		//read image 
 		cam->get_frame(&camFrame);
 		rectifier->rectify(camFrame, rectifiedCamFrame);
+		
+		ros::Time time = ros::Time::now();
+		cv_bridge::CvImage cvi;
+		cvi.header.stamp = time;
+        cvi.header.frame_id = "image";
+        cvi.encoding = "bgr8";
+		cvi.image = rectifiedCamFrame;
+
+		pub.publish(cvi.toImageMsg());	
+
 
 		//DEPRECATED		
-		IplImage cv_output = rectifiedCamFrame;
-		pub.publish(bridge.cvToImgMsg(&cv_output, "bgr8"));
+		//IplImage cv_output = rectifiedCamFrame;
+		//pub.publish(bridge.cvToImgMsg(&cv_output, "bgr8"));
 		
 		cv::waitKey(1000/30);
 		
