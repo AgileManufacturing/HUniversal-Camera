@@ -27,15 +27,34 @@
  *
  **/ 
 
-#include "ros/ros.h"
 #include "CameraNode/cameranode.h"
 
-#define NODE_NAME "CameraNode" 
+CameraNode::CameraNode(int argc, char * argv[]) 
+:
+it(nodeHandler)
+{
+	if (argc != 4){
+		exit(1);
+	}
+	//setup the camera
+	int device_number = atoi(argv[1]);
+	int format_number = atoi(argv[2]);
+	cam = new unicap_cv_bridge::unicap_cv_camera(device_number,format_number);
+	cam->set_auto_white_balance(true);
+	cam->set_exposure(0.015);
+	camFrame = cv::Mat(cam->get_img_height(), cam->get_img_width(), cam->get_img_format());	
 
-//static Camera::Camera * cam;
+	//setup the camera lens distortion corrector
+	rectifier = new Camera::RectifyImage();
+	if(!rectifier->initRectify(argv[3], cv::Size(cam->get_img_width(), cam->get_img_height()))) {
+		std::cout << "XML not found" << std::endl;
+		exit(2);
+	}	
+	pub = it.advertise("camera/image", 1);
+}
 
-CameraNode::CameraNode() {
-
+CameraNode::~CameraNode() {
+	delete cam;
 }
 
 bool recalibrate(std_srvs::Empty &req, std_srvs::Empty &res) {
@@ -43,15 +62,28 @@ bool recalibrate(std_srvs::Empty &req, std_srvs::Empty &res) {
 }
 
 void CameraNode::run() {
-	if(!calibrate()) ros::shutdown();
-
-	it(nh);
-	pub = it.advertise("camera/image", 1);
-
-
-	while(nh.ok()) {
+	
+	ros::Rate loop_rate(5);
+	while(ros::ok()){
 		//read image 
 		cam->get_frame(&camFrame);
-		camera->rectify(camFrame, rectifiedCamFrame);
-	}
+		rectifier->rectify(camFrame, rectifiedCamFrame);
+
+		//DEPRECATED		
+		IplImage cv_output = rectifiedCamFrame;
+		pub.publish(bridge.cvToImgMsg(&cv_output, "bgr8"));
+		
+		cv::waitKey(1000/30);
+		
+		ros::spinOnce();
+	} 
+}
+
+int main(int argc, char* argv[]){
+	ros::init(argc, argv, "cameraNode");
+
+	CameraNode cn(argc, argv);
+    cn.run();
+
+    return 0;
 }

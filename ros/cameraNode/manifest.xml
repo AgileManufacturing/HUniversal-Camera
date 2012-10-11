@@ -4,7 +4,15 @@
      HUniversal_camera
 
   </description>
-  <author>Arjan Groenewgeen</author>
+  <author>Arjan Groenewegen</author>
+  
+  <depend package="image_transport" />
+  <depend package="cv_bridge" />
+  <depend package="opencv2" />
+  <depend package="sensor_msgs" /> 
+  <depend package="std_msgs" />   
+  <depend package="roscpp" />  
+  
   <license>BSD</license>
   <review status="unreviewed" notes=""/>
   <url>http://ros.org/wiki/HUniversal_camera</url>

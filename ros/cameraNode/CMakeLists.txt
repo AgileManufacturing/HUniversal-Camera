@@ -16,16 +16,16 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 camera_rospack_init("cameraNode" true true)
 
 # Add executables as documented by ROS
-rosbuild_add_executable(cameraNode src/main.cpp)
+rosbuild_add_executable(CameraNode src/cameranode.cpp)
 
 # Add dependencies to our libraries and other ROS packages in the same directory as this one. 
-add_dependencies(cameraNode camera)
+add_dependencies(CameraNode camera)
 
 # Include our libraries, they are all exported in libraries/LibrariesExport.cmake
-include_directories("${LIB_CAMERA_INCLUDE}")
+include_directories("${LIB_CAMERA_INCLUDE}" ${UNICAP_INCLUDE_DIRS})
 
 # Link target to our libraries
-target_link_libraries(UNICAM_BRIGE)
+target_link_libraries(CameraNode camera)
 
 # MUST be called after lcv_rospack_init to clean up after ROSBUILD!
 camera_rospack_end()
