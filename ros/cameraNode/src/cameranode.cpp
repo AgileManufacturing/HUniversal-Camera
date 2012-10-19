@@ -129,7 +129,7 @@ void CameraNode::run() {
 		cv_bridge::CvImage cvi;
 		cvi.header.stamp = time;
         cvi.header.frame_id = "image";
-        cvi.encoding = "bgr8";
+        cvi.encoding = sensor_msgs::image_encodings::BGR8;
 		cvi.image = rectifiedCamFrame;
 
 		pub.publish(cvi.toImageMsg());	
