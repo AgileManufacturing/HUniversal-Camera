@@ -134,6 +134,7 @@ void CameraNode::run() {
 
 		pub.publish(cvi.toImageMsg());	
 		cv::waitKey(1000/30);
+		loop_rate.sleep();
 		
 		ros::spinOnce();
 	} 
