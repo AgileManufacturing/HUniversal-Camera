@@ -12,8 +12,15 @@
 *.a
 
 # Ignore the generated folders by the build system
-
 bin/
+build
+
+# Ros files
 srv_gen/
 msg_gen/
-build
+ros/cameraNode/src/cameraNode
+
+# Eclipse project
+.project
+
+sync.sh
