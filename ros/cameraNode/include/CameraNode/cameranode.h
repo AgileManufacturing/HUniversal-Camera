@@ -47,25 +47,34 @@
 #include <sstream>
 #include <std_srvs/Empty.h>
 
+#include <cameraNode/AutoWhiteBalance.h>
+
 class CameraNode {
 public:
 	CameraNode(int argc, char * argv[]);
-	~CameraNode();
-	void run();
-	bool recalibrate(std_srvs::Empty &req, std_srvs::Empty &res);
+	~CameraNode( );
+	void run( );
+
+	bool increaseExposure(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
+	bool decreaseExposure(std_srvs::Empty::Request &request, std_srvs::Empty::Response &response);
+	bool autoWhiteBalance(cameraNode::AutoWhiteBalance::Request &request,
+	        cameraNode::AutoWhiteBalance::Response &response);
+
 private:
 	unicap_cv_bridge::unicap_cv_camera * cam;
 	Camera::RectifyImage * rectifier;
 
 	cv::Mat camFrame;
 	cv::Mat rectifiedCamFrame;
-	
-	ros::NodeHandle nodeHandler;
-	image_transport::ImageTransport it;		
+
+	ros::NodeHandle nodeHandle;
+	image_transport::ImageTransport it;
 	image_transport::Publisher pub;
 
 	int numberOfStableFrames;
-	bool invokeCalibration; 
+	bool invokeCalibration;
+
+	double exposure;
 };
 
 #endif
