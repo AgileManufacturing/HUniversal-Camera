@@ -13,16 +13,16 @@ cmake_minimum_required(VERSION 2.4.6)
 include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 
 # Initialize ROS package to be in our build system. 
-camera_rospack_init("cameraNode" true true)
+camera_rospack_init("cameraNode" false true)
 
 # Add executables as documented by ROS
 rosbuild_add_executable(CameraNode src/cameranode.cpp)
 
+# Include our libraries, they are all exported in libraries/LibrariesExport.cmake
+include_directories(${LIB_CAMERA_INCLUDE} ${UNICAP_INCLUDE_DIRS} ${LIB_UTILITIES_INCLUDE})
+
 # Add dependencies to our libraries and other ROS packages in the same directory as this one. 
 add_dependencies(CameraNode camera)
-
-# Include our libraries, they are all exported in libraries/LibrariesExport.cmake
-include_directories("${LIB_CAMERA_INCLUDE}" ${UNICAP_INCLUDE_DIRS})
 
 # Link target to our libraries
 target_link_libraries(CameraNode camera)
