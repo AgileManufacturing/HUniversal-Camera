@@ -1,0 +1,20 @@
+<package>
+  <description brief="HUniversal_camera_control">
+
+     HUniversal_camera controller
+
+  </description>
+  <author>Koen Braham</author>
+  <author>Daan Veltman</author>
+  
+  <depend package="std_msgs" />   
+  <depend package="roscpp" /> 
+  <depend package="cameraNode" /> 
+  
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/HUniversal_camera</url>
+
+</package>
+
+

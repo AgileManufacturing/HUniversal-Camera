@@ -15,7 +15,7 @@
 
 ######## Configuration ##########
 
-set(CAMERA_PARTS libraries ros)
+set(CAMERA_PARTS libraries ros tools)
 
 # Note: Set buildtype with cmake -D CMAKE_BUILD_TYPE=<Debug|Release> <source>
 # It might be a smart idea to make two out-of-source build directories, 

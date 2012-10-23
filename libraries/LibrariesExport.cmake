@@ -4,3 +4,5 @@
 # TODO: Find a nicer way to take care of this. 
 
 set(LIB_CAMERA_INCLUDE "${CAMERA_SOURCE_DIR}/libraries/camera/include")
+set(LIB_UTILITIES_INCLUDE "${CAMERA_SOURCE_DIR}/libraries/utilities/include")
+set(NODE_CAMERA_INCLUDE "${CAMERA_SOURCE_DIR}/ros/cameraNode/include")

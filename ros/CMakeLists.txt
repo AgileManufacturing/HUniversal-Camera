@@ -1,5 +1,5 @@
 ####### Add all ROS packages here
-set(ROSPACKS cameraNode)
+set(ROSPACKS cameraNode cameraControlNode)
 
 ######
 ### Don't change anything below, the part below checks if ROS is installed and configured correctly. 
