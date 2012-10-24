@@ -30,6 +30,8 @@
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+#include "boost/date_time/posix_time/posix_time.hpp"
+
 namespace Utilities {
 
 	/**
@@ -62,6 +64,17 @@ namespace Utilities {
 
 		return 0;
 	}
+
+    /**
+     * Get the current time in milliseconds.
+     *
+     * @return time in milliseconds.
+     **/
+    long timeNow(void){
+        boost::posix_time::ptime time = boost::posix_time::microsec_clock::local_time();
+        boost::posix_time::time_duration duration(time.time_of_day());
+        return duration.total_milliseconds();
+    }
 
 } /* namespace Utilities */
 #endif /* UTILITIES_H_ */

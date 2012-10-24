@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
 					undistort = !undistort;
 			} else if (key == 'b') {
 				ss.str("");
-				ss << "Image" << counter++ << ".jpg";
+				ss << "Image" << counter++ << Utilities::timeNow() <<  ".jpg";
 				if (undistort) {
 					imwrite(ss.str().c_str(), undistorted);
 				} else {
