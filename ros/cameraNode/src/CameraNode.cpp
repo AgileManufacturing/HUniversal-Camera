@@ -29,8 +29,8 @@
  *
  **/
 
-#include "CameraNode/cameranode.h"
-#include "CameraNode/services.h"
+#include "CameraNode/CameraNode.h"
+#include "CameraNode/Services.h"
 #include "Utilities/Utilities.h"
 
 CameraNode::CameraNode(int argc, char * argv[]) : it(nodeHandle), exposure(0.015) {

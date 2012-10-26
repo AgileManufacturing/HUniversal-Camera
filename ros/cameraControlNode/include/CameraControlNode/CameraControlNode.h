@@ -32,7 +32,7 @@
 #define CAMERACONTROLNODE_H_
 
 #include "ros/ros.h"
-#include "CameraNode/cameranode.h"
+#include "CameraNode/CameraNode.h"
 
 class CameraControlNode {
 public:

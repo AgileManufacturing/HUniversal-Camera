@@ -150,9 +150,43 @@ int main(int argc, char** argv) {
 			return -1;
 		}
 		std::cout << "DONE training" << std::endl;
+	} else if(command.compare("correct") == 0) {
+		if(argc < 3) {
+			std::cerr << "Second argument has to be the image file." << std::endl;
+			return -1;
+		} else if(argc < 4) {
+			std::cerr << "Last argument has to be the calibration xml file." << std::endl;
+			return -1;
+		}
+
+		Camera::RectifyImage rectifier;
+
+		cv::Mat image = cv::imread(argv[3]);
+		if(image.data == NULL) {
+			std::cerr << "Unable to read image." << std::endl;
+			exit(1);
+		}
+		if(!rectifier.initRectify(argv[2], cv::Size(image.cols, image.rows))) {
+			std::cerr << "XML not found" << std::endl;
+			return -1;
+		}
+		cv::imshow("Original", image);
+		cvMoveWindow("Original", 0, 100);
+		cv::Mat temp = image.clone();
+		rectifier.rectify(image, temp);
+		cv::imshow("Corrected", temp);
+		cvMoveWindow("Corrected", image.cols, 100);
+
+		while(1) {
+			if( cvWaitKey (100) == 'q' ) break;
+		}
+
+		image.release();
+		cv::destroyWindow("Corrected");
+		cv::destroyWindow("Original");
+
+		std::cout << "DONE correcting" << std::endl;
 	}
-	// TODO: Implement correct function
-	// See svn vision calibratecamera for an example
 
 	return 0;
 }

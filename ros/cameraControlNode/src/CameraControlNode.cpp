@@ -29,7 +29,7 @@
  **/
 
 #include "CameraControlNode/CameraControlNode.h"
-#include "CameraNode/services.h"
+#include "CameraNode/Services.h"
 #include <iostream>
 
 CameraControlNode::CameraControlNode() :

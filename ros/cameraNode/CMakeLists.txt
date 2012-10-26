@@ -16,7 +16,7 @@ include($ENV{ROS_ROOT}/core/rosbuild/rosbuild.cmake)
 camera_rospack_init("cameraNode" false true)
 
 # Add executables as documented by ROS
-rosbuild_add_executable(CameraNode src/cameranode.cpp)
+rosbuild_add_executable(CameraNode src/CameraNode.cpp)
 
 # Include our libraries, they are all exported in libraries/LibrariesExport.cmake
 include_directories(${LIB_CAMERA_INCLUDE} ${UNICAP_INCLUDE_DIRS} ${LIB_UTILITIES_INCLUDE})
