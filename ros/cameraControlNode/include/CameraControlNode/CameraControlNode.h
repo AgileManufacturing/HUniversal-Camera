@@ -36,15 +36,15 @@
 
 class CameraControlNode {
 public:
-	CameraControlNode( );
+	CameraControlNode();
 
-	void increaseExposureCall( );
-	void decreaseExposureCall( );
+	void increaseExposureCall();
+	void decreaseExposureCall();
 	void autoWhiteBalanceCall(bool enabled);
 
 	inline std::string printResult(bool result);
 
-	void run( );
+	void run();
 
 private:
 	ros::NodeHandle nodeHandle;

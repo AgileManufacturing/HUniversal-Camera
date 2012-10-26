@@ -32,18 +32,18 @@
 #include "CameraNode/services.h"
 #include <iostream>
 
-CameraControlNode::CameraControlNode( ) :
+CameraControlNode::CameraControlNode() :
 		increaseExposureClient(nodeHandle.serviceClient<std_srvs::Empty>(CameraNodeServices::INCREASE_EXPOSURE)),
 		decreaseExposureClient(nodeHandle.serviceClient<std_srvs::Empty>(CameraNodeServices::DECREASE_EXPOSURE)),
 		autoWhiteBalanceClient(nodeHandle.serviceClient<cameraNode::AutoWhiteBalance>(CameraNodeServices::AUTO_WHITE_BALANCE)) {
 }
 
-void CameraControlNode::increaseExposureCall( ) {
+void CameraControlNode::increaseExposureCall() {
 	std::cout << "Calling service increaseExposureClient " << printResult(increaseExposureClient.call(emptyService))
 	        << std::endl;
 }
 
-void CameraControlNode::decreaseExposureCall( ) {
+void CameraControlNode::decreaseExposureCall() {
 	std::cout << "Calling service decreaseExposureClient " << printResult(decreaseExposureClient.call(emptyService))
 	        << std::endl;
 }
@@ -59,18 +59,18 @@ inline std::string CameraControlNode::printResult(bool result) {
 	return (result ? "[OK]" : "[FAIL]");
 }
 
-void CameraControlNode::run( ) {
+void CameraControlNode::run() {
 	char key;
-	while (ros::ok() && !(key == 'q' || key == 'Q')) {
+	while(ros::ok() && !(key == 'q' || key == 'Q')) {
 		std::cin >> key;
 
-		if (key == 'a' || key == 'A') {
+		if(key == 'a' || key == 'A') {
 			autoWhiteBalanceCall(true);
-		} else if (key == 'z' || key == 'Z') {
+		} else if(key == 'z' || key == 'Z') {
 			autoWhiteBalanceCall(false);
-		} else if (key == 's' || key == 'S') {
+		} else if(key == 's' || key == 'S') {
 			increaseExposureCall();
-		} else if (key == 'x' || key == 'X') {
+		} else if(key == 'x' || key == 'X') {
 			decreaseExposureCall();
 		}
 	}

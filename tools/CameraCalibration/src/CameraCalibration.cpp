@@ -39,7 +39,7 @@
 #include <Utilities/Utilities.h>
 
 int main(int argc, char** argv) {
-	if (argc < 2) {
+	if(argc < 2) {
 		std::cerr << "Usage for calibration application: " << std::endl << argv[0]
 		        << " list - list of all unicap devices" << std::endl << argv[0]
 		        << " capture device_number format_number [calibration_xml]" << std::endl << argv[0]
@@ -49,18 +49,17 @@ int main(int argc, char** argv) {
 	}
 
 	std::string command = argv[1];
-	if (command.compare("list") == 0) {
+	if(command.compare("list") == 0) {
 		unicap_cv_bridge::print_devices_inventory();
 		return 0;
-	} else if (command.compare("capture") == 0) {
-
+	} else if(command.compare("capture") == 0) {
 		int device_number, format_number;
-		if (Utilities::str2int(device_number, argv[2]) != 0) {
+		if(Utilities::str2int(device_number, argv[2]) != 0) {
 			std::cerr << "Device number is not a valid number." << std::endl;
 			exit(2);
 		}
 
-		if (Utilities::str2int(format_number, argv[3]) != 0) {
+		if(Utilities::str2int(format_number, argv[3]) != 0) {
 			std::cerr << "Format number is not a valid number." << std::endl;
 			exit(3);
 		}
@@ -70,7 +69,7 @@ int main(int argc, char** argv) {
 
 		cv::Mat undistorted;
 		Camera::RectifyImage rectifier;
-		if (argc > 4)
+		if(argc > 4)
 			rectifier.initRectify(argv[4], camSize);
 
 		cv::Mat frame(camSize, cam.get_img_format());
@@ -84,10 +83,10 @@ int main(int argc, char** argv) {
 		bool tripmode = false;
 		bool undistort = argc > 4;
 
-		while (key != 'q') {
+		while(key != 'q') {
 			cam.get_frame(&frame);
 
-			if (undistort) {
+			if(undistort) {
 				rectifier.rectify(frame, undistorted);
 				imshow("undistorted", undistorted);
 			} else {
@@ -98,26 +97,26 @@ int main(int argc, char** argv) {
 
 			key = cv::waitKey(10);
 			std::stringstream ss;
-			if (key == 'w') {
+			if(key == 'w') {
 				exposure *= 1.125;
 				cam.set_exposure(exposure);
-			} else if (key == 's') {
+			} else if(key == 's') {
 				exposure /= 1.125;
 				cam.set_exposure(exposure);
-			} else if (key == 'a') {
+			} else if(key == 'a') {
 				cam.set_auto_white_balance(true);
-			} else if (key == 'z') {
+			} else if(key == 'z') {
 				cam.set_auto_white_balance(false);
-			} else if (key == 't') {
+			} else if(key == 't') {
 				tripmode = !tripmode;
 				cam.set_trip_mode(tripmode);
-			} else if (key == 'c') {
-				if (argc > 4)
+			} else if(key == 'c') {
+				if(argc > 4)
 					undistort = !undistort;
-			} else if (key == 'b') {
+			} else if(key == 'b') {
 				ss.str("");
 				ss << "Image" << counter++ << Utilities::timeNow() <<  ".jpg";
-				if (undistort) {
+				if(undistort) {
 					imwrite(ss.str().c_str(), undistorted);
 				} else {
 					imwrite(ss.str().c_str(), frame);
@@ -128,23 +127,25 @@ int main(int argc, char** argv) {
 			std::cout.flush();
 		}
 		return 0;
-	} else if (command.compare("train") == 0) {
-		if (argc < 3) {
+	} else if(command.compare("train") == 0) {
+		if(argc < 3) {
 			std::cerr << "Second argument has to be the image directory." << std::endl;
 			return -1;
-		} else if (argc < 4) {
+		} else if(argc < 4) {
 			std::cerr << "Last argument has to be the newly generated file location." << std::endl;
 			return -1;
 		}
 
 		/**
 		 * @var boardSize
-		 * boardSize is determined with the amount of inner corners for the width of the chessboard (so 10 blocks is 9 inner corners) and the amount of inner corners for the height of the chessboard (so 7 blocks is 6 inner corners)
+		 * boardSize is determined with the amount of inner corners for the width of the chessboard 
+		 * (so 10 blocks is 9 inner corners) and the amount of inner corners for the height 
+		 * of the chessboard (so 7 blocks is 6 inner corners)
 		 */
 		cv::Size boardSize(9, 6);
 		Camera::RectifyImage rectifier;
 		// TODO: Live calibration? Read X images of camera?
-		if (rectifier.createXML(argv[2], boardSize, argv[3]) <= 0) {
+		if(rectifier.createXML(argv[2], boardSize, argv[3]) <= 0) {
 			std::cerr << "training failed" << std::endl;
 			return -1;
 		}
@@ -155,4 +156,3 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
-
